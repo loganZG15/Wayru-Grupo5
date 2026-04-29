@@ -14,6 +14,6 @@ public interface IDistritoRepository extends JpaRepository<Distrito, Integer> {
     Optional<Distrito> findByNombreDistrito(String nombreDistrito);
 
     @Query(value = "SELECT DISTINCT d.* FROM Distrito d " +
-            " INNER JOIN incidencia i ON d.idDistrito = i.idDistrito", nativeQuery = true)
+            " INNER JOIN incidencia i ON d.id_distrito = i.id_distrito", nativeQuery = true)
     List<Distrito> findDistritosConIncidencias();
 }
