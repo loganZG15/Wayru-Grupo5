@@ -10,5 +10,4 @@ public interface IUsuarioService {
     public Usuario insert(Usuario u);
     Usuario buscarPorEmail(String email);
     List<Usuario> buscarPorNombre(String nombre);
-    Usuario buscarPorId(Long id);
 }
