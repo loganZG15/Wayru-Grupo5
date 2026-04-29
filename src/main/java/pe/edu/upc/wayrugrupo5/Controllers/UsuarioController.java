@@ -55,4 +55,17 @@ public class UsuarioController {
             return ResponseEntity.ok(lista);
         }
     }
+
+    @GetMapping("/buscarPorId/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable("id") int id) {
+        ModelMapper m = new ModelMapper();
+        Usuario u = uS.buscarPorId(id);
+
+        if (u == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontró el usuario con el ID: " + id);
+        } else {
+            return ResponseEntity.ok(m.map(u, UsuarioDTO.class));
+        }
+    }
 }
