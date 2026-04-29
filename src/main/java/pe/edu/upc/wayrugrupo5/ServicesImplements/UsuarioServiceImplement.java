@@ -35,4 +35,9 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public Usuario buscarPorId(int id) {
         return uR.findById(id).orElse(null);
     }
+
+    @Override
+    public List<Usuario> listarTodo() {
+        return uR.findAll();
+}
 }
