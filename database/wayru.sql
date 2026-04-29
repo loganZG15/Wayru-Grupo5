@@ -371,3 +371,72 @@ ALTER TABLE ONLY public.incidencia
 
 \unrestrict h3Gw8bpxNH1KdOOmA1jdMstgvHeDcFeSkmtLqZhP5XQfWiR6gbRJjcMxQutVnR4
 
+-- ==========================================
+-- DATA: categoria_incidencia
+-- ==========================================
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (1, 'Infraestructura', 'Bache en pista');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (2, 'Infraestructura', 'Vereda dañada');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (3, 'Seguridad', 'Robo a transeúnte');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (4, 'Seguridad', 'Vandalismo');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (5, 'Limpieza', 'Acumulación de basura');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (6, 'Limpieza', 'Desmonte en vía pública');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (7, 'Alumbrado', 'Poste sin luz');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (8, 'Alumbrado', 'Cable eléctrico caído');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (9, 'Tránsito', 'Señal de tránsito dañada');
+INSERT INTO public.categoria_incidencia (id_categoria, nombre_categoria, sub_categoria) VALUES (10, 'Tránsito', 'Semáforo en mal estado');
+
+-- ==========================================
+-- DATA: distrito
+-- ==========================================
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (1, -12.0464, -77.0428, 'Lima Centro');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (2, -12.1219, -77.0291, 'Miraflores');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (3, -12.1300, -77.0172, 'San Isidro');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (4, -12.0874, -77.0472, 'Jesús María');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (5, -12.0565, -76.9894, 'San Juan de Lurigancho');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (6, -12.1549, -76.9706, 'La Molina');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (7, -12.0931, -77.0081, 'San Borja');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (8, -12.0750, -77.0833, 'Callao');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (9, -12.1628, -76.9995, 'Santiago de Surco');
+INSERT INTO public.distrito (id_distrito, latitud, longitud, nombre_distrito) VALUES (10, -11.9925, -77.0531, 'Comas');
+
+-- ==========================================
+-- DATA: usuario
+-- ==========================================
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (1, 'pass1234', 'carlos.ramos@gmail.com', 'Carlos Ramos');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (2, 'pass1234', 'lucia.flores@gmail.com', 'Lucia Flores');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (3, 'pass1234', 'miguel.torres@gmail.com', 'Miguel Torres');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (4, 'pass1234', 'ana.garcia@gmail.com', 'Ana Garcia');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (5, 'pass1234', 'jose.mendoza@gmail.com', 'Jose Mendoza');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (6, 'pass1234', 'rosa.perez@gmail.com', 'Rosa Perez');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (7, 'pass1234', 'luis.vargas@gmail.com', 'Luis Vargas');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (8, 'pass1234', 'maria.quispe@gmail.com', 'Maria Quispe');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (9, 'pass1234', 'pedro.castillo@gmail.com', 'Pedro Castillo');
+INSERT INTO public.usuario (id_usuario, password, email, nombre_usuario) VALUES (10, 'pass1234', 'elena.huanca@gmail.com', 'Elena Huanca');
+
+-- ==========================================
+-- DATA: incidencia
+-- ==========================================
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (1,  true,  '2026-01-10', 1, 1, 1, 'Bache profundo en la Av. Abancay frente al mercado.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (2,  false, '2026-01-15', 3, 2, 2, 'Robo a mano armada en el parque Kennedy.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (3,  true,  '2026-01-20', 5, 3, 3, 'Acumulación de basura en la Av. Javier Prado.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (4,  false, '2026-02-05', 7, 4, 4, 'Poste de alumbrado sin luz en Jr. Huiracocha.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (5,  true,  '2026-02-10', 2, 5, 5, 'Vereda rota frente al colegio en SJL.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (6,  false, '2026-02-18', 9, 6, 6, 'Señal de tránsito caída en La Molina.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (7,  true,  '2026-03-01', 4, 7, 7, 'Grafitis en la pared del parque San Borja.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (8,  false, '2026-03-12', 6, 8, 8, 'Desmonte botado en la Av. Néstor Gambetta.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (9,  true,  '2026-03-20', 10, 9, 9, 'Semáforo dañado en la Av. Benavides, Surco.');
+INSERT INTO public.incidencia (id_incidencia, estado, fecha_incidencia, id_categoria, id_distrito, id_usuario, descripcion) VALUES (10, false, '2026-04-01', 8, 10, 10, 'Cable eléctrico caído en la Av. Túpac Amaru, Comas.');
+
+-- ==========================================
+-- DATA: zona_preferida
+-- ==========================================
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (1,  1,  1,  'Lima Centro');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (2,  2,  2,  'Miraflores');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (3,  3,  3,  'San Isidro');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (4,  4,  4,  'Jesús María');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (5,  5,  5,  'San Juan de Lurigancho');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (6,  6,  6,  'La Molina');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (7,  7,  7,  'San Borja');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (8,  8,  8,  'Callao');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (9,  9,  9,  'Santiago de Surco');
+INSERT INTO public.zona_preferida (id_zona, distrito, id_usuario, nombre_distrito) VALUES (10, 10, 10, 'Comas');
