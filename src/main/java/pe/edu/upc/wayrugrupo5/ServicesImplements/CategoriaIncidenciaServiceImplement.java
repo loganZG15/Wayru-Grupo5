@@ -22,7 +22,7 @@ public class CategoriaIncidenciaServiceImplement implements ICategoriaIncidencia
 
     @Override
     public List<CategoriaIncidencia> buscarPorNombre(String nombreCategoria) {
-        return cR.findByNombreCategoria(nombreCategoria);
+        return cR.findByNombreCategoriaContainingIgnoreCase(nombreCategoria);
     }
 
     @Override

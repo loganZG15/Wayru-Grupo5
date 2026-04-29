@@ -13,7 +13,7 @@ public interface IDistritoRepository extends JpaRepository<Distrito, Integer> {
 
     Optional<Distrito> findByNombreDistritoContainingIgnoreCase(String nombreDistrito);
 
-    @Query(value = "SELECT DISTINCT d.* FROM Distrito d " +
+    @Query(value = "SELECT DISTINCT d.* FROM distrito d " +
             " INNER JOIN incidencia i ON d.id_distrito = i.id_distrito", nativeQuery = true)
     List<Distrito> findDistritosConIncidencias();
 }

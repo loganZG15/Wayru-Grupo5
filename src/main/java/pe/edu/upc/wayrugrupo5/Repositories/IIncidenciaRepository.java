@@ -11,12 +11,13 @@ import java.util.List;
 public interface IIncidenciaRepository extends JpaRepository<Incidencia, Integer> {
     List<Incidencia> findByDistritoIdDistrito(int idDistrito);
 
-    @Query("SELECT i FROM Incidencia i WHERE i.estado = true ORDER BY i.fechaIncidencia DESC")
+    @Query("SELECT i FROM Incidencia i WHERE i.estado = " +
+            " true ORDER BY i.fechaIncidencia DESC")
     List<Incidencia> findIncidenciasActivas();
 
-    @Query(value = "SELECT c.nombreCategoria, COUNT(i.idIncidencia) AS total " +
+    @Query(value = "SELECT c.nombre_categoria, COUNT(i.id_incidencia) AS total " +
             " FROM incidencia i " +
-            " JOIN categoriaIncidencia c ON i.idCategoria = c.idCategoria " +
-            " GROUP BY c.nombreCategoria", nativeQuery = true)
+            " JOIN categoria_incidencia c ON i.id_categoria = c.id_categoria " +
+            " GROUP BY c.nombre_categoria", nativeQuery = true)
     List<Object[]> countIncidenciasPorCategoria();
 }
