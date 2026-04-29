@@ -13,7 +13,6 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Usuario findByEmail(String email);
 
-    @Query("SELECT u FROM Usuario u WHERE LOWER(u.nombreUsuario) LIKE LOWER(CONCAT('%', :nombre, '%'))")
-    List<Usuario> buscarPorNombre(String nombre);
+    List<Usuario> findByNombreUsuarioContainingIgnoreCase(String nombre);
 
 }

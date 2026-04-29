@@ -21,11 +21,11 @@ public class DistritoServiceImplement implements IDistritoService {
 
     @Override
     public Distrito buscarPorNombre(String nombreDistrito) {
-        return dR.findByNombreDistrito(nombreDistrito).orElse(null);
+        return dR.findByNombreDistritoContainingIgnoreCase(nombreDistrito).orElse(null);
     }
 
     @Override
     public List<Distrito> listarConIncidencias() {
-        return dR.findDistritosConIncidencias();
+        return dR.findDistritosConIncidenciasContainingIgnoreCase();
     }
 }

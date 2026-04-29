@@ -28,6 +28,6 @@ public class UsuarioServiceImplement implements IUsuarioService {
 
     @Override
     public List<Usuario> buscarPorNombre(String nombre) {
-        return uR.buscarPorNombre(nombre);
+        return uR.findByNombreUsuarioContainingIgnoreCase(nombre);
     }
 }
