@@ -26,6 +26,6 @@ public class DistritoServiceImplement implements IDistritoService {
 
     @Override
     public List<Distrito> listarConIncidencias() {
-        return dR.findDistritosConIncidenciasContainingIgnoreCase();
+        return dR.findDistritosConIncidencias();
     }
 }
