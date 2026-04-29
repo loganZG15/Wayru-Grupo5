@@ -1,10 +1,11 @@
 package pe.edu.upc.wayrugrupo5.ServicesInterfaces;
 
+import org.springframework.stereotype.Service;
 import pe.edu.upc.wayrugrupo5.Entities.Usuario;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
 public interface IUsuarioService {
     public Usuario insert(Usuario u);
     Usuario buscarPorEmail(String email);

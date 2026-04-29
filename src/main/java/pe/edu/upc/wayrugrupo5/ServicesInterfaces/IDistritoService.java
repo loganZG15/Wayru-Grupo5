@@ -9,6 +9,6 @@ import java.util.Optional;
 @Service
 public interface IDistritoService {
     public Distrito insert(Distrito d);
-    Optional<Distrito> buscarPorNombre(String nombreDistrito);
+    Distrito buscarPorNombre(String nombreDistrito);
     List<Distrito> listarConIncidencias();
 }

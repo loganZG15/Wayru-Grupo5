@@ -20,8 +20,8 @@ public class DistritoServiceImplement implements IDistritoService {
     }
 
     @Override
-    public Optional<Distrito> buscarPorNombre(String nombreDistrito) {
-        return dR.findByNombreDistrito(nombreDistrito);
+    public Distrito buscarPorNombre(String nombreDistrito) {
+        return dR.findByNombreDistrito(nombreDistrito).orElse(null);
     }
 
     @Override

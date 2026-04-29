@@ -1,12 +1,14 @@
 package pe.edu.upc.wayrugrupo5.ServicesImplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pe.edu.upc.wayrugrupo5.Entities.ZonaPreferida;
 import pe.edu.upc.wayrugrupo5.Repositories.IZonaPreferidaRepository;
 import pe.edu.upc.wayrugrupo5.ServicesInterfaces.IZonaPreferidaService;
 
 import java.util.List;
 
+@Service
 public class ZonaPreferidaServiceImplement implements IZonaPreferidaService {
 
     @Autowired
