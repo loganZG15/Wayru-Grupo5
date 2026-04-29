@@ -19,5 +19,4 @@ public interface IIncidenciaRepository extends JpaRepository<Incidencia, Integer
             " JOIN categoriaIncidencia c ON i.idCategoria = c.idCategoria " +
             " GROUP BY c.nombreCategoria", nativeQuery = true)
     List<Object[]> countIncidenciasPorCategoria();
-    List<Incidencia> findByFechaIncidencia(java.time.LocalDate fecha);
 }
