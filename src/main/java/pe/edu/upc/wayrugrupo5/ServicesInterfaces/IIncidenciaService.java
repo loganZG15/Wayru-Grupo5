@@ -11,4 +11,5 @@ public interface IIncidenciaService {
     List<Incidencia> listarPorDistrito(int idDistrito);
     List<Incidencia> listarActivas();
     List<Object[]> contarPorCategoria();
+    List<Incidencia> buscarPorFecha(java.time.LocalDate fecha);
 }
