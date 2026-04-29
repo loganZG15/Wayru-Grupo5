@@ -68,4 +68,12 @@ public class UsuarioController {
             return ResponseEntity.ok(m.map(u, UsuarioDTO.class));
         }
     }
+
+    @GetMapping("/listar")
+    public List<UsuarioDTO> listar() {
+        ModelMapper m = new ModelMapper();
+        return uS.listarTodo().stream()
+                .map(u -> m.map(u, UsuarioDTO.class))
+                .collect(Collectors.toList());
+    }
 }
