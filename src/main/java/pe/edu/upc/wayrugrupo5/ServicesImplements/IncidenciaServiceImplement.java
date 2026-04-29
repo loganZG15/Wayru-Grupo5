@@ -34,4 +34,9 @@ public class IncidenciaServiceImplement implements IIncidenciaService {
     public List<Object[]> contarPorCategoria() {
         return iR.countIncidenciasPorCategoria();
     }
+
+    @Override
+    public List<Incidencia> buscarPorFecha(java.time.LocalDate fecha) {
+    return iR.findByFechaIncidencia(fecha);
+}
 }
