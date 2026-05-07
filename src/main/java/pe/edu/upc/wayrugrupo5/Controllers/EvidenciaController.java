@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.wayrugrupo5.ServicesInterfaces.IEvidenciaService;
 
 @RestController
-@RequestMapping("Api/Evidencia")
+@RequestMapping("/api/evidencia")
 public class EvidenciaController {
 
     @Autowired
