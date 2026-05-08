@@ -45,7 +45,7 @@ public class DistritoController {
     }
 
     @GetMapping("/con-incidencias")
-    @PreAuthorize("hasAuthority('cliente')")
+    @PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
     public ResponseEntity<List<DistritoDTO>> listarConIncidencias() {
         ModelMapper m = new ModelMapper();
         List<DistritoDTO> lista = dS.listarConIncidencias()
