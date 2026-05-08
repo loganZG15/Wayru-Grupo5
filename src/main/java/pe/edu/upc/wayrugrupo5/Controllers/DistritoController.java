@@ -21,7 +21,7 @@ public class DistritoController {
     private IDistritoService dS;
 
     @PostMapping("/crear-distritos")
-    @PreAuthorize("hasAuthority('cliente')")
+    @PreAuthorize("hasAuthority('soporte')")
     public ResponseEntity<DistritoDTO> registrar(@RequestBody DistritoDTO dto)
     {
         ModelMapper m = new ModelMapper();
