@@ -2,6 +2,8 @@ package pe.edu.upc.wayrugrupo5.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Usuario")
 public class Usuario {
@@ -9,7 +11,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUsuario;
 
-    @Column(name = "nombreUsuario", length = 50, nullable = false)
+    @Column(name = "nombreUsuario", length = 50, nullable = false, unique = true)
     private String nombreUsuario;
 
     @Column(name = "email", length = 50, nullable = false)
@@ -18,14 +20,22 @@ public class Usuario {
     @Column(name = "password", length = 20, nullable = false)
     private String password;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Rol> roles;
+
+
+
+
     public Usuario() {
     }
 
-    public Usuario(int idUsuario, String nombreUsuario, String email, String password) {
+    public Usuario(int idUsuario, String nombreUsuario, String email, String password, List<Rol> roles) {
         this.idUsuario = idUsuario;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
 
     public int getIdUsuario() {
@@ -58,5 +68,13 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 }

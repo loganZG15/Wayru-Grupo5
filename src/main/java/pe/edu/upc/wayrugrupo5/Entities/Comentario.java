@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaDTO;
 
 @Entity
-@Table(name = "Conemtario")
+@Table(name = "Comentario")
 public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
