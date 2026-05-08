@@ -17,7 +17,6 @@ import pe.edu.upc.wayrugrupo5.ServicesImplements.JwtUserDetailsService;
 
 import java.io.IOException;
 
-//Clase 6
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
