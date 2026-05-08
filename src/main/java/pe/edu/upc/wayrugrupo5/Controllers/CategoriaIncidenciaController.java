@@ -33,6 +33,7 @@ public class CategoriaIncidenciaController {
     }
 
     @GetMapping("/por-nombre")
+    @PreAuthorize("hasAuthority('soporte') or hasAuthority('admin')")
     public ResponseEntity<?> buscarPorNombre(@RequestParam("nombre") String nombre) {
         ModelMapper m = new ModelMapper();
         List<CategoriaIncidenciaDTO> lista = iS.buscarPorNombre(nombre)

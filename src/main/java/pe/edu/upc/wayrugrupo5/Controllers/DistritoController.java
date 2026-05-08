@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.DistritoDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Distrito;
@@ -20,6 +21,7 @@ public class DistritoController {
     private IDistritoService dS;
 
     @PostMapping("/crear-distritos")
+    @PreAuthorize("hasAuthority('cliente')")
     public ResponseEntity<DistritoDTO> registrar(@RequestBody DistritoDTO dto)
     {
         ModelMapper m = new ModelMapper();
@@ -30,6 +32,7 @@ public class DistritoController {
     }
 
     @GetMapping("/buscar")
+    @PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
     public ResponseEntity<?> buscarPorNombre(@RequestParam("nombre") String nombre) {
         ModelMapper m = new ModelMapper();
         Distrito d = dS.buscarPorNombre(nombre);
@@ -42,6 +45,7 @@ public class DistritoController {
     }
 
     @GetMapping("/con-incidencias")
+    @PreAuthorize("hasAuthority('cliente')")
     public ResponseEntity<List<DistritoDTO>> listarConIncidencias() {
         ModelMapper m = new ModelMapper();
         List<DistritoDTO> lista = dS.listarConIncidencias()
