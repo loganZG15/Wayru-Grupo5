@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/categoria-incidencia")
+@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
 public class CategoriaIncidenciaController {
 
     @Autowired

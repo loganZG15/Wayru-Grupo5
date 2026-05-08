@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.EvidenciaDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Evidencia;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/evidencia")
+@PreAuthorize("hasAuthority('soporte') or hasAuthority('admin')")
 public class EvidenciaController {
 
     @Autowired

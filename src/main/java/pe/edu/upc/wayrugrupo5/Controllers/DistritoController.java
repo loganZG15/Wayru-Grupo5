@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/distrito")
+@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
 public class DistritoController {
 
     @Autowired

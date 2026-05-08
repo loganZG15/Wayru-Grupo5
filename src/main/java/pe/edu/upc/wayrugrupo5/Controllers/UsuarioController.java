@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@PreAuthorize("hasAuthority('cliente')")
+@PreAuthorize("hasAuthority('admin')")
 public class UsuarioController {
 
     @Autowired

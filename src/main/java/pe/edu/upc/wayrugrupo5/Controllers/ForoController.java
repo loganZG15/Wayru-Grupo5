@@ -2,6 +2,7 @@ package pe.edu.upc.wayrugrupo5.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.ForoDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Foro;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/foro")
+@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
 public class ForoController {
     @Autowired
     private IForoService fS;
