@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/foro")
-
 public class ForoController {
     @Autowired
     private IForoService fS;
