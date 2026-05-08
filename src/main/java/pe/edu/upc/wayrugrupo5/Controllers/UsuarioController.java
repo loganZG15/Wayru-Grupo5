@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@PreAuthorize("hasAuthority('cliente')")
 public class UsuarioController {
 
     @Autowired
@@ -71,7 +72,6 @@ public class UsuarioController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('cliente')")
     public List<UsuarioDTO> listar() {
         ModelMapper m = new ModelMapper();
         return uS.listarTodo().stream()
