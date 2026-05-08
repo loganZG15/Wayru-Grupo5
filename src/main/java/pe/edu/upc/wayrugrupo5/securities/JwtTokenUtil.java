@@ -88,7 +88,7 @@ public class    JwtTokenUtil{
                 .signWith(
                         new SecretKeySpec(
                                 Base64.getDecoder().decode(secret),
-                                SignatureAlgorithm.HS512.getJcaName()
+                                SignatureAlgorithm.HS256.getJcaName()
                         )
                 )
                 .compact();

@@ -17,7 +17,7 @@ public class Usuario {
     @Column(name = "email", length = 50, nullable = false)
     private String email;
 
-    @Column(name = "password", length = 20, nullable = false)
+    @Column(name = "password", length = 200, nullable = false)
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
