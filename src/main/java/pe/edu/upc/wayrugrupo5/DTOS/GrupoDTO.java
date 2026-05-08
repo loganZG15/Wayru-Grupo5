@@ -6,21 +6,45 @@ public class GrupoDTO {
     private String nombreGrupo;
     private String descripcion;
     private String tipoGrupo;
-    private Usuario usuario;
+    private int idUsuario;
 
-    public int getIdGrupo() {return idGrupo;}
+    public int getIdGrupo() {
+        return idGrupo;
+    }
 
-    public void setIdGrupo(int idGrupo) {this.idGrupo = idGrupo;}
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
+    }
 
-    public String getNombreGrupo() {return nombreGrupo;}
+    public String getNombreGrupo() {
+        return nombreGrupo;
+    }
 
-    public void setNombreGrupo(String nombreGrupo) {this.nombreGrupo = nombreGrupo;}
+    public void setNombreGrupo(String nombreGrupo) {
+        this.nombreGrupo = nombreGrupo;
+    }
 
-    public String getDescripcion() {return descripcion;}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-    public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-    public String getTipoGrupo() {return tipoGrupo;}
+    public String getTipoGrupo() {
+        return tipoGrupo;
+    }
 
-    public void setTipoGrupo(String tipoGrupo) {this.tipoGrupo = tipoGrupo;}
+    public void setTipoGrupo(String tipoGrupo) {
+        this.tipoGrupo = tipoGrupo;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 }

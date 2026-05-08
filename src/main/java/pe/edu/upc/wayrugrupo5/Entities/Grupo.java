@@ -18,7 +18,7 @@ public class Grupo {
     @Column(name = "tipoGrupo", length = 250, nullable = false)
     private String tipoGrupo;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
