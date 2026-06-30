@@ -28,4 +28,24 @@ public class DistritoServiceImplement implements IDistritoService {
     public List<Distrito> listarConIncidencias() {
         return dR.findDistritosConIncidencias();
     }
+
+    @Override
+    public List<Distrito> listarTodo() {
+        return dR.findAll();
+    }
+
+    @Override
+    public Distrito buscarPorId(int id) {
+        return dR.findById(id).orElse(null);
+    }
+
+    @Override
+    public Distrito update(Distrito d) {
+        return dR.save(d);
+    }
+
+    @Override
+    public void delete(int id) {
+        dR.deleteById(id);
+    }
 }
