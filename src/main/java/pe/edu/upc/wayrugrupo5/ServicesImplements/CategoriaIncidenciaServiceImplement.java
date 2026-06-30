@@ -17,6 +17,10 @@ public class CategoriaIncidenciaServiceImplement implements ICategoriaIncidencia
 
     @Override
     public CategoriaIncidencia insert(CategoriaIncidencia cI) {
+        cR.findByNombreCategoriaIgnoreCase(cI.getNombreCategoria()).ifPresent(existente -> {
+            throw new IllegalArgumentException(
+                    "Ya existe una categoría con el nombre '" + existente.getNombreCategoria() + "'");
+        });
         return cR.save(cI);
     }
 
@@ -42,6 +46,12 @@ public class CategoriaIncidenciaServiceImplement implements ICategoriaIncidencia
 
     @Override
     public CategoriaIncidencia update(CategoriaIncidencia cI) {
+        cR.findByNombreCategoriaIgnoreCase(cI.getNombreCategoria()).ifPresent(existente -> {
+            if (existente.getIdCategoria() != cI.getIdCategoria()) {
+                throw new IllegalArgumentException(
+                        "Ya existe una categoría con el nombre '" + existente.getNombreCategoria() + "'");
+            }
+        });
         return cR.save(cI);
     }
 
