@@ -11,4 +11,8 @@ public interface IDistritoService {
     public Distrito insert(Distrito d);
     Distrito buscarPorNombre(String nombreDistrito);
     List<Distrito> listarConIncidencias();
+    List<Distrito> listarTodo();
+    Distrito buscarPorId(int id);
+    Distrito update(Distrito d);
+    void delete(int id);
 }
