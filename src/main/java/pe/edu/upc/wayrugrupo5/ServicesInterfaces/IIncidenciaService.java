@@ -11,4 +11,8 @@ public interface IIncidenciaService {
     List<Incidencia> listarPorDistrito(int idDistrito);
     List<Incidencia> listarActivas();
     List<Object[]> contarPorCategoria();
+    List<Incidencia> listarTodo();
+    Incidencia buscarPorId(int id);
+    Incidencia update(Incidencia i);
+    void delete(int id);
 }
