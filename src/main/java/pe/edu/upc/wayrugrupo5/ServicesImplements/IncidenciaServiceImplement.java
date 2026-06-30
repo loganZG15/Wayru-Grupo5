@@ -34,4 +34,24 @@ public class IncidenciaServiceImplement implements IIncidenciaService {
     public List<Object[]> contarPorCategoria() {
         return iR.countIncidenciasPorCategoria();
     }
+
+    @Override
+    public List<Incidencia> listarTodo() {
+        return iR.findAll();
+    }
+
+    @Override
+    public Incidencia buscarPorId(int id) {
+        return iR.findById(id).orElse(null);
+    }
+
+    @Override
+    public Incidencia update(Incidencia i) {
+        return iR.save(i);
+    }
+
+    @Override
+    public void delete(int id) {
+        iR.deleteById(id);
+    }
 }
