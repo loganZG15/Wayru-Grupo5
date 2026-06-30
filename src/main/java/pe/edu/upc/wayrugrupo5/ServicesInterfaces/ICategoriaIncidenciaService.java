@@ -10,4 +10,8 @@ public interface ICategoriaIncidenciaService {
     public CategoriaIncidencia insert(CategoriaIncidencia cI);
     List<CategoriaIncidencia> buscarPorNombre(String nombreCategoria);
     List<CategoriaIncidencia> buscarPorSubCategoria(String subCategoria);
+    List<CategoriaIncidencia> listarTodo();
+    CategoriaIncidencia buscarPorId(int id);
+    CategoriaIncidencia update(CategoriaIncidencia cI);
+    void delete(int id);
 }
