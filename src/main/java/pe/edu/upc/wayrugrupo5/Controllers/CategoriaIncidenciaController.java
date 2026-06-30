@@ -23,13 +23,17 @@ public class CategoriaIncidenciaController {
 
     @PostMapping("/Crear-categorias-incidencias")
     //@PreAuthorize("hasAuthority('cliente')")
-    private ResponseEntity<CategoriaIncidenciaDTO> registrar(@RequestBody CategoriaIncidenciaDTO dto)
+    private ResponseEntity<?> registrar(@RequestBody CategoriaIncidenciaDTO dto)
     {
         ModelMapper m = new ModelMapper();
         CategoriaIncidencia cI = m.map(dto, CategoriaIncidencia.class);
-        CategoriaIncidencia cur = iS.insert(cI);
-        CategoriaIncidenciaDTO responsedto = m.map(cur, CategoriaIncidenciaDTO.class);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responsedto);
+        try {
+            CategoriaIncidencia cur = iS.insert(cI);
+            CategoriaIncidenciaDTO responsedto = m.map(cur, CategoriaIncidenciaDTO.class);
+            return ResponseEntity.status(HttpStatus.CREATED).body(responsedto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @GetMapping("/por-nombre")
@@ -92,8 +96,12 @@ public class CategoriaIncidenciaController {
     public ResponseEntity<?> actualizar(@RequestBody CategoriaIncidenciaDTO dto) {
         ModelMapper m = new ModelMapper();
         CategoriaIncidencia c = m.map(dto, CategoriaIncidencia.class);
-        CategoriaIncidencia actualizada = iS.update(c);
-        return ResponseEntity.ok(m.map(actualizada, CategoriaIncidenciaDTO.class));
+        try {
+            CategoriaIncidencia actualizada = iS.update(c);
+            return ResponseEntity.ok(m.map(actualizada, CategoriaIncidenciaDTO.class));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
