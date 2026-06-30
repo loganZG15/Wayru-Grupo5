@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaDTO;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaPorCategoriaDTO;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/incidencias")
-@PreAuthorize("hasAuthority('soporte')")
+//@PreAuthorize("hasAuthority('soporte')") LIBERAR LUEGO
 public class IncidenciaController {
 
     @Autowired
@@ -63,20 +62,6 @@ public class IncidenciaController {
         }
     }
 
-    @GetMapping("/listar")
-    public ResponseEntity<?> listar() {
-        ModelMapper m = new ModelMapper();
-        List<IncidenciaDTO> lista = iS.listarTodo()
-                .stream()
-                .map(inc -> m.map(inc, IncidenciaDTO.class))
-                .collect(Collectors.toList());
-        if (lista.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No hay incidencias registradas");
-        }
-        return ResponseEntity.ok(lista);
-    }
-
     @GetMapping("/conteo-por-categoria")
     public ResponseEntity<?> contarPorCategoria() {
         List<Object[]> listaConteo = iS.contarPorCategoria();
@@ -92,5 +77,49 @@ public class IncidenciaController {
             respuesta.add(dto);
         }
         return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        ModelMapper m = new ModelMapper();
+        List<IncidenciaDTO> lista = iS.listarTodo()
+                .stream()
+                .map(inc -> m.map(inc, IncidenciaDTO.class))
+                .collect(Collectors.toList());
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay incidencias registradas");
+        }
+        return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable int id) {
+        ModelMapper m = new ModelMapper();
+        Incidencia i = iS.buscarPorId(id);
+        if (i == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Incidencia con id " + id + " no encontrada");
+        }
+        return ResponseEntity.ok(m.map(i, IncidenciaDTO.class));
+    }
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<?> actualizar(@RequestBody IncidenciaDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Incidencia i = m.map(dto, Incidencia.class);
+        Incidencia actualizada = iS.update(i);
+        return ResponseEntity.ok(m.map(actualizada, IncidenciaDTO.class));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminar(@PathVariable int id) {
+        Incidencia existente = iS.buscarPorId(id);
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Incidencia con id " + id + " no encontrada");
+        }
+        iS.delete(id);
+        return ResponseEntity.ok("Incidencia eliminada correctamente");
     }
 }
