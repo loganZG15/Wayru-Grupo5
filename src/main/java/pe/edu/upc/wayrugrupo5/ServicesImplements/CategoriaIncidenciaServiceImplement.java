@@ -29,4 +29,24 @@ public class CategoriaIncidenciaServiceImplement implements ICategoriaIncidencia
     public List<CategoriaIncidencia> buscarPorSubCategoria(String subCategoria) {
         return cR.findBySubCategoria(subCategoria);
     }
+
+    @Override
+    public List<CategoriaIncidencia> listarTodo() {
+        return cR.findAll();
+    }
+
+    @Override
+    public CategoriaIncidencia buscarPorId(int id) {
+        return cR.findById(id).orElse(null);
+    }
+
+    @Override
+    public CategoriaIncidencia update(CategoriaIncidencia cI) {
+        return cR.save(cI);
+    }
+
+    @Override
+    public void delete(int id) {
+        cR.deleteById(id);
+    }
 }
