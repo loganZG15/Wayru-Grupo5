@@ -11,6 +11,8 @@ import java.util.List;
 public interface IIncidenciaRepository extends JpaRepository<Incidencia, Integer> {
     List<Incidencia> findByDistritoIdDistrito(int idDistrito);
 
+    List<Incidencia> findByCategoriaIncidenciaIdCategoria(int idCategoria);
+
     @Query("SELECT i FROM Incidencia i WHERE i.estado = " +
             " true ORDER BY i.fechaIncidencia DESC")
     List<Incidencia> findIncidenciasActivas();
