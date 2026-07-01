@@ -47,6 +47,21 @@ public class IncidenciaController {
         }
     }
 
+    @GetMapping("/por-categoria/{idCategoria}")
+    public ResponseEntity<?> listarPorCategoria(@PathVariable int idCategoria) {
+        ModelMapper m = new ModelMapper();
+        List<IncidenciaDTO> lista = iS.listarPorCategoria(idCategoria)
+                .stream()
+                .map(inc -> m.map(inc, IncidenciaDTO.class))
+                .collect(Collectors.toList());
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay incidencias para esta categoría");
+        } else {
+            return ResponseEntity.ok(lista);
+        }
+    }
+
     @GetMapping("/activas")
     public ResponseEntity<?> listarActivas() {
         ModelMapper m = new ModelMapper();
