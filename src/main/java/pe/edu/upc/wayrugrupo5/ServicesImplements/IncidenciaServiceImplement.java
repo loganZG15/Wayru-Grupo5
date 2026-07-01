@@ -26,6 +26,11 @@ public class IncidenciaServiceImplement implements IIncidenciaService {
     }
 
     @Override
+    public List<Incidencia> listarPorCategoria(int idCategoria) {
+        return iR.findByCategoriaIncidenciaIdCategoria(idCategoria);
+    }
+
+    @Override
     public List<Incidencia> listarActivas() {
         return iR.findIncidenciasActivas();
     }
