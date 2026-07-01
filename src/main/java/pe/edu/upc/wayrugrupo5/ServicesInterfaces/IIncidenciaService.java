@@ -9,6 +9,7 @@ import java.util.List;
 public interface IIncidenciaService {
     public Incidencia insert(Incidencia i);
     List<Incidencia> listarPorDistrito(int idDistrito);
+    List<Incidencia> listarPorCategoria(int idCategoria);
     List<Incidencia> listarActivas();
     List<Object[]> contarPorCategoria();
     List<Incidencia> listarTodo();
