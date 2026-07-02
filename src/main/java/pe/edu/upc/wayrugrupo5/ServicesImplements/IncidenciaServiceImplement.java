@@ -41,6 +41,11 @@ public class IncidenciaServiceImplement implements IIncidenciaService {
     }
 
     @Override
+    public List<Object[]> contarPorDistrito() {
+        return iR.countIncidenciasPorDistrito();
+    }
+
+    @Override
     public List<Incidencia> listarTodo() {
         return iR.findAll();
     }
