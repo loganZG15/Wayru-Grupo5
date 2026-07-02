@@ -22,4 +22,10 @@ public interface IIncidenciaRepository extends JpaRepository<Incidencia, Integer
             " JOIN categoria_incidencia c ON i.id_categoria = c.id_categoria " +
             " GROUP BY c.nombre_categoria", nativeQuery = true)
     List<Object[]> countIncidenciasPorCategoria();
+
+    @Query(value = "SELECT d.nombre_distrito, COUNT(i.id_incidencia) AS total " +
+            " FROM incidencia i " +
+            " JOIN distrito d ON i.id_distrito = d.id_distrito " +
+            " GROUP BY d.nombre_distrito", nativeQuery = true)
+    List<Object[]> countIncidenciasPorDistrito();
 }
