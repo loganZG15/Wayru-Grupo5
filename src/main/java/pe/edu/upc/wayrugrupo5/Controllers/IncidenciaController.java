@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaDTO;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaPorCategoriaDTO;
+import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaPorDistritoDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Incidencia;
 import pe.edu.upc.wayrugrupo5.ServicesInterfaces.IIncidenciaService;
 
@@ -88,6 +89,23 @@ public class IncidenciaController {
         for (Object[] fila : listaConteo) {
             IncidenciaPorCategoriaDTO dto = new IncidenciaPorCategoriaDTO();
             dto.setNombreCategoria((String) fila[0]);
+            dto.setTotal(((Number) fila[1]).intValue());
+            respuesta.add(dto);
+        }
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/conteo-por-distrito")
+    public ResponseEntity<?> contarPorDistrito() {
+        List<Object[]> listaConteo = iS.contarPorDistrito();
+        if (listaConteo.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay incidencias registradas por distrito");
+        }
+        List<IncidenciaPorDistritoDTO> respuesta = new ArrayList<>();
+        for (Object[] fila : listaConteo) {
+            IncidenciaPorDistritoDTO dto = new IncidenciaPorDistritoDTO();
+            dto.setNombreDistrito((String) fila[0]);
             dto.setTotal(((Number) fila[1]).intValue());
             respuesta.add(dto);
         }
