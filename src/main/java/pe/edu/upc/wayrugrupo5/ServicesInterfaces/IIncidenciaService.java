@@ -12,6 +12,7 @@ public interface IIncidenciaService {
     List<Incidencia> listarPorCategoria(int idCategoria);
     List<Incidencia> listarActivas();
     List<Object[]> contarPorCategoria();
+    List<Object[]> contarPorDistrito();
     List<Incidencia> listarTodo();
     Incidencia buscarPorId(int id);
     Incidencia update(Incidencia i);
