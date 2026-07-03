@@ -10,6 +10,7 @@ public interface IIncidenciaService {
     public Incidencia insert(Incidencia i);
     List<Incidencia> listarPorDistrito(int idDistrito);
     List<Incidencia> listarPorCategoria(int idCategoria);
+    List<Incidencia> listarPorUsuario(int idUsuario);
     List<Incidencia> listarActivas();
     List<Object[]> contarPorCategoria();
     List<Object[]> contarPorDistrito();

@@ -31,6 +31,11 @@ public class IncidenciaServiceImplement implements IIncidenciaService {
     }
 
     @Override
+    public List<Incidencia> listarPorUsuario(int idUsuario) {
+        return iR.findByUsuarioIdUsuario(idUsuario);
+    }
+
+    @Override
     public List<Incidencia> listarActivas() {
         return iR.findIncidenciasActivas();
     }

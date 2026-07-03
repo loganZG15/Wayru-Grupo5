@@ -13,6 +13,8 @@ public interface IIncidenciaRepository extends JpaRepository<Incidencia, Integer
 
     List<Incidencia> findByCategoriaIncidenciaIdCategoria(int idCategoria);
 
+    List<Incidencia> findByUsuarioIdUsuario(int idUsuario);
+
     @Query("SELECT i FROM Incidencia i WHERE i.estado = " +
             " true ORDER BY i.fechaIncidencia DESC")
     List<Incidencia> findIncidenciasActivas();

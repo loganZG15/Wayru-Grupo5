@@ -5,11 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaDTO;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaPorCategoriaDTO;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaPorDistritoDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Incidencia;
+import pe.edu.upc.wayrugrupo5.Entities.Usuario;
+import pe.edu.upc.wayrugrupo5.Repositories.IUsuarioRepository;
 import pe.edu.upc.wayrugrupo5.ServicesInterfaces.IIncidenciaService;
 
 import java.util.ArrayList;
@@ -23,6 +27,36 @@ public class IncidenciaController {
 
     @Autowired
     private IIncidenciaService iS;
+
+    @Autowired
+    private IUsuarioRepository uR;
+
+    private Usuario usuarioActual() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        return uR.findByNombreUsuario(username);
+    }
+
+    private boolean esAdmin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("admin"));
+    }
+
+    @GetMapping("/mis-incidencias")
+    public ResponseEntity<?> misIncidencias() {
+        Usuario usuario = usuarioActual();
+        ModelMapper m = new ModelMapper();
+        List<IncidenciaDTO> lista = iS.listarPorUsuario(usuario.getIdUsuario())
+                .stream()
+                .map(inc -> m.map(inc, IncidenciaDTO.class))
+                .collect(Collectors.toList());
+        if (lista.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No tienes incidencias registradas");
+        }
+        return ResponseEntity.ok(lista);
+    }
 
     @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
     @PostMapping("/Crear-incidencias")
@@ -141,22 +175,35 @@ public class IncidenciaController {
         return ResponseEntity.ok(m.map(i, IncidenciaDTO.class));
     }
 
-    @PreAuthorize("hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(@RequestBody IncidenciaDTO dto) {
+        Incidencia existente = iS.buscarPorId(dto.getIdIncidencia());
+        if (existente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Incidencia con id " + dto.getIdIncidencia() + " no encontrada");
+        }
+        if (!esAdmin() && existente.getUsuario().getIdUsuario() != usuarioActual().getIdUsuario()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No puedes actualizar una incidencia que no es tuya");
+        }
         ModelMapper m = new ModelMapper();
         Incidencia i = m.map(dto, Incidencia.class);
         Incidencia actualizada = iS.update(i);
         return ResponseEntity.ok(m.map(actualizada, IncidenciaDTO.class));
     }
 
-    @PreAuthorize("hasAuthority('admin')")
+    @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable int id) {
         Incidencia existente = iS.buscarPorId(id);
         if (existente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incidencia con id " + id + " no encontrada");
+        }
+        if (!esAdmin() && existente.getUsuario().getIdUsuario() != usuarioActual().getIdUsuario()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body("No puedes eliminar una incidencia que no es tuya");
         }
         iS.delete(id);
         return ResponseEntity.ok("Incidencia eliminada correctamente");
