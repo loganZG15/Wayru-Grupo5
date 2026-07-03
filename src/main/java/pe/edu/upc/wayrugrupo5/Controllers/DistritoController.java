@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/distrito")
-@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
+@PreAuthorize("hasAnyAuthority('cliente', 'soporte', 'admin')")
 public class DistritoController {
 
     @Autowired
     private IDistritoService dS;
 
+    @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @PostMapping("/crear-distritos")
-    //@PreAuthorize("hasAuthority('soporte')")
     public ResponseEntity<DistritoDTO> registrar(@RequestBody DistritoDTO dto)
     {
         ModelMapper m = new ModelMapper();
@@ -81,6 +81,7 @@ public class DistritoController {
         return ResponseEntity.ok(m.map(d, DistritoDTO.class));
     }
 
+    @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(@RequestBody DistritoDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -89,6 +90,7 @@ public class DistritoController {
         return ResponseEntity.ok(m.map(actualizado, DistritoDTO.class));
     }
 
+    @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable int id) {
         Distrito existente = dS.buscarPorId(id);

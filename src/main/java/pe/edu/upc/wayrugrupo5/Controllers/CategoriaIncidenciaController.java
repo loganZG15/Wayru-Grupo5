@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.CategoriaIncidenciaDTO;
 import pe.edu.upc.wayrugrupo5.Entities.CategoriaIncidencia;
@@ -15,14 +16,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/categoria-incidencia")
-//@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
+@PreAuthorize("hasAnyAuthority('cliente', 'soporte', 'admin')")
 public class CategoriaIncidenciaController {
 
     @Autowired
     private ICategoriaIncidenciaService iS;
 
+    @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @PostMapping("/Crear-categorias-incidencias")
-    //@PreAuthorize("hasAuthority('cliente')")
     private ResponseEntity<?> registrar(@RequestBody CategoriaIncidenciaDTO dto)
     {
         ModelMapper m = new ModelMapper();
@@ -92,6 +93,7 @@ public class CategoriaIncidenciaController {
         return ResponseEntity.ok(m.map(c, CategoriaIncidenciaDTO.class));
     }
 
+    @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(@RequestBody CategoriaIncidenciaDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -104,6 +106,7 @@ public class CategoriaIncidenciaController {
         }
     }
 
+    @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable int id) {
         CategoriaIncidencia existente = iS.buscarPorId(id);

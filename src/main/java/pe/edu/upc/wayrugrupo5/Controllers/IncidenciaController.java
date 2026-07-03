@@ -18,12 +18,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/incidencias")
-@PreAuthorize("hasAnyAuthority('cliente' ,'admin')")
+@PreAuthorize("hasAnyAuthority('cliente', 'soporte', 'admin')")
 public class IncidenciaController {
 
     @Autowired
     private IIncidenciaService iS;
 
+    @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
     @PostMapping("/Crear-incidencias")
     private ResponseEntity<IncidenciaDTO> registrar(@RequestBody IncidenciaDTO dto)
     {
@@ -96,6 +97,7 @@ public class IncidenciaController {
         }
         return ResponseEntity.ok(respuesta);
     }
+
     @PreAuthorize("permitAll()")
     @GetMapping("/conteo-por-distrito")
     public ResponseEntity<?> contarPorDistrito() {
@@ -139,6 +141,7 @@ public class IncidenciaController {
         return ResponseEntity.ok(m.map(i, IncidenciaDTO.class));
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(@RequestBody IncidenciaDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -147,6 +150,7 @@ public class IncidenciaController {
         return ResponseEntity.ok(m.map(actualizada, IncidenciaDTO.class));
     }
 
+    @PreAuthorize("hasAuthority('admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable int id) {
         Incidencia existente = iS.buscarPorId(id);
