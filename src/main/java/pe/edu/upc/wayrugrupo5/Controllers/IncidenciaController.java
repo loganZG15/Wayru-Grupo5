@@ -79,6 +79,7 @@ public class IncidenciaController {
         }
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/conteo-por-categoria")
     public ResponseEntity<?> contarPorCategoria() {
         List<Object[]> listaConteo = iS.contarPorCategoria();
@@ -95,7 +96,7 @@ public class IncidenciaController {
         }
         return ResponseEntity.ok(respuesta);
     }
-
+    @PreAuthorize("permitAll()")
     @GetMapping("/conteo-por-distrito")
     public ResponseEntity<?> contarPorDistrito() {
         List<Object[]> listaConteo = iS.contarPorDistrito();
