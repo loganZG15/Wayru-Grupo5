@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaDTO;
 import pe.edu.upc.wayrugrupo5.DTOS.IncidenciaPorCategoriaDTO;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/incidencias")
-//@PreAuthorize("hasAuthority('soporte')") LIBERAR LUEGO
+@PreAuthorize("hasAnyAuthority('cliente' ,'admin')")
 public class IncidenciaController {
 
     @Autowired

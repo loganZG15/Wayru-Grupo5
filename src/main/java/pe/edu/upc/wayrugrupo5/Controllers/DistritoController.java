@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.DistritoDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Distrito;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/distrito")
-//@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')") //DESBLOQUEAR LUEGO
+@PreAuthorize("hasAuthority('cliente') or hasAuthority('soporte')")
 public class DistritoController {
 
     @Autowired
