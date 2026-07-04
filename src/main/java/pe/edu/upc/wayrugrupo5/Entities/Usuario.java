@@ -20,8 +20,7 @@ public class Usuario {
     @Column(name = "password", length = 200, nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Rol> roles;
 
 
