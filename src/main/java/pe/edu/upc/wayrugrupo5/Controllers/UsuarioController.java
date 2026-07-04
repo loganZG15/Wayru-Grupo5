@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.wayrugrupo5.DTOS.UsuarioDTO;
 import pe.edu.upc.wayrugrupo5.Entities.Usuario;
+import pe.edu.upc.wayrugrupo5.Repositories.IUsuarioRepository;
 import pe.edu.upc.wayrugrupo5.ServicesInterfaces.IUsuarioService;
 
 import java.util.List;
@@ -20,6 +23,24 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService uS;
+
+    @Autowired
+    private IUsuarioRepository uR;
+
+    @PreAuthorize("hasAnyAuthority('cliente', 'soporte', 'admin')")
+    @GetMapping("/mi-perfil")
+    public ResponseEntity<?> miPerfil() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        Usuario u = uR.findByNombreUsuario(username);
+        if (u == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        }
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO dto = m.map(u, UsuarioDTO.class);
+        dto.setPassword(null);
+        return ResponseEntity.ok(dto);
+    }
 
     @PostMapping("/crear-usuario")
     public ResponseEntity<UsuarioDTO> registrar(@RequestBody UsuarioDTO dto)
