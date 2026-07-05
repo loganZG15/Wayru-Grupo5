@@ -150,6 +150,7 @@ public class IncidenciaController {
         return ResponseEntity.ok(respuesta);
     }
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/listar")
     public ResponseEntity<?> listar() {
         ModelMapper m = new ModelMapper();
