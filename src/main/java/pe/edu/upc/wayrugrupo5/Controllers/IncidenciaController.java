@@ -175,7 +175,7 @@ public class IncidenciaController {
         return ResponseEntity.ok(m.map(i, IncidenciaDTO.class));
     }
 
-    @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
+    @PreAuthorize("hasAnyAuthority('cliente', 'soporte', 'admin')")
     @PutMapping("/actualizar")
     public ResponseEntity<?> actualizar(@RequestBody IncidenciaDTO dto) {
         Incidencia existente = iS.buscarPorId(dto.getIdIncidencia());
