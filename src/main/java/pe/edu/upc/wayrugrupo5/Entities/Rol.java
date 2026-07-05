@@ -4,7 +4,7 @@ package pe.edu.upc.wayrugrupo5.Entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "rol"})})
+@Table(name = "roles", uniqueConstraints = {@UniqueConstraint(columnNames = {"id_usuario", "rol"})})
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
