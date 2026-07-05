@@ -37,10 +37,10 @@ public class IncidenciaController {
         return uR.findByNombreUsuario(username);
     }
 
-    private boolean esAdmin() {
+    private boolean puedeGestionarTodo() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("admin"));
+                .anyMatch(a -> a.getAuthority().equals("admin") || a.getAuthority().equals("soporte"));
     }
 
     @GetMapping("/mis-incidencias")
@@ -60,7 +60,7 @@ public class IncidenciaController {
 
     @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
     @PostMapping("/Crear-incidencias")
-    public ResponseEntity<IncidenciaDTO> registrar(@RequestBody IncidenciaDTO dto)
+    private ResponseEntity<IncidenciaDTO> registrar(@RequestBody IncidenciaDTO dto)
     {
         ModelMapper m = new ModelMapper();
         Incidencia i = m.map(dto, Incidencia.class);
@@ -183,7 +183,7 @@ public class IncidenciaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incidencia con id " + dto.getIdIncidencia() + " no encontrada");
         }
-        if (!esAdmin() && existente.getUsuario().getIdUsuario() != usuarioActual().getIdUsuario()) {
+        if (!puedeGestionarTodo() && existente.getUsuario().getIdUsuario() != usuarioActual().getIdUsuario()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No puedes actualizar una incidencia que no es tuya");
         }
@@ -193,7 +193,7 @@ public class IncidenciaController {
         return ResponseEntity.ok(m.map(actualizada, IncidenciaDTO.class));
     }
 
-    @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
+    @PreAuthorize("hasAnyAuthority('cliente', 'soporte', 'admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable int id) {
         Incidencia existente = iS.buscarPorId(id);
@@ -201,7 +201,7 @@ public class IncidenciaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incidencia con id " + id + " no encontrada");
         }
-        if (!esAdmin() && existente.getUsuario().getIdUsuario() != usuarioActual().getIdUsuario()) {
+        if (!puedeGestionarTodo() && existente.getUsuario().getIdUsuario() != usuarioActual().getIdUsuario()) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No puedes eliminar una incidencia que no es tuya");
         }
