@@ -24,7 +24,7 @@ public class CategoriaIncidenciaController {
 
     @PreAuthorize("hasAnyAuthority('soporte', 'admin')")
     @PostMapping("/Crear-categorias-incidencias")
-    private ResponseEntity<?> registrar(@RequestBody CategoriaIncidenciaDTO dto)
+    public ResponseEntity<?> registrar(@RequestBody CategoriaIncidenciaDTO dto)
     {
         ModelMapper m = new ModelMapper();
         CategoriaIncidencia cI = m.map(dto, CategoriaIncidencia.class);
@@ -38,7 +38,7 @@ public class CategoriaIncidenciaController {
     }
 
     @GetMapping("/por-nombre")
-    //@PreAuthorize("hasAuthority('soporte') or hasAuthority('admin')")
+    @PreAuthorize("hasAuthority('soporte') or hasAuthority('admin')")
     public ResponseEntity<?> buscarPorNombre(@RequestParam("nombre") String nombre) {
         ModelMapper m = new ModelMapper();
         List<CategoriaIncidenciaDTO> lista = iS.buscarPorNombre(nombre)
