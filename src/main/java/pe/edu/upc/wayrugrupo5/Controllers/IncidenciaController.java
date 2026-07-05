@@ -60,7 +60,7 @@ public class IncidenciaController {
 
     @PreAuthorize("hasAnyAuthority('cliente', 'admin')")
     @PostMapping("/Crear-incidencias")
-    private ResponseEntity<IncidenciaDTO> registrar(@RequestBody IncidenciaDTO dto)
+    public ResponseEntity<IncidenciaDTO> registrar(@RequestBody IncidenciaDTO dto)
     {
         ModelMapper m = new ModelMapper();
         Incidencia i = m.map(dto, Incidencia.class);
